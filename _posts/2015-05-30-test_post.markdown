@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "test post"
+date:   2015-05-30 19:56:40
+categories: jekyll update
+---
+Hello world!
+
+{% highlight rust %}
+fn main {
+  println!("hello world");
+}
+{% endhighlight %}
