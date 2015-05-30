@@ -4,7 +4,8 @@ title:  "test post"
 date:   2015-05-30 19:56:40
 categories: jekyll update
 ---
-Hello world!
+Hello world!  
+team Sadang
 
 {% highlight rust %}
 fn main {
