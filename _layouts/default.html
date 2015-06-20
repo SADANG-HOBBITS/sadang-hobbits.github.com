@@ -1,20 +1,101 @@
 <!DOCTYPE html>
-<html>
-
-  {% include head.html %}
-
-  <body>
-
-    {% include header.html %}
-
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
+<!--[if lt ie 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if ie 7]>         <html class="lt-ie9 lt-ie8 ie7"> <![endif]-->
+<!--[if ie 8]>         <html class="lt-ie9 ie8"> <![endif]-->
+<!--[if gt ie 8]><!--> <html class=""> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Rust Korea Tech Study</title>
+{% if page.title %}
+{% assign base_path = '../../..' %}
+<meta property="og:title" content="{{ page.title }}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://sadang-hobbits.github.io{{ page.url }}">
+<meta property="og:site_name" content="Rust Korea Tech Study">
+<meta property="og:description" content="{{ page.description }}">
+{% else %}
+{% if paginator.page == 1 %}
+  {% assign base_path = '.' %}
+{% else %}
+  {% assign base_path = '..' %}
+{% endif %}
+<meta property="og:title" content="Rust Korea Tech Study">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="{{ site.home_url }}">
+<meta property="og:site_name" content="Rust Korea Tech Study">
+<meta property="og:description" content="Upload Articles about Rust Toy Project.">
+{% endif %}
+<meta property="og:image" content="{{ site.home_url }}{{ site.representing_image }}">
+<script>
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+<script src="//use.typekit.net/ise6lwp.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+<link rel="stylesheet" href="{{ base_path }}/css/styles.css">
+<link rel="stylesheet" href="{{ base_path }}/css/syntax.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link href="{{ base_path }}/atom.xml" type="application/atom+xml" rel="alternate" title="Rust Korea Tech Study" />
+<link rel="shortcut icon" href="{{ base_path }}/images/favicon.ico" />
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <div class="header-item">
+        <div class="hovit-logo-wrap">
+          <a class="hovit-logo" href="{{ base_path }}/"><img src="{{ base_path }}/images/favicon.ico"></a>
+          <a class="blog-title" href="{{ base_path }}/"><b>Rust Toy Project</b></a>
+        </div>
+        <div class="nav">
+          <input type="checkbox" id="toggle">
+          <label for="toggle" class="toggle" onclick></label>
+          <ul class="menu">
+            <li><a class="
+              {% if page.url == '/about.html' %}
+              selected
+              {% endif %} menu-about" href="{{ base_path }}/about.html">about</a></li>
+            <li><a class="
+              {% if page.url != '/about.html' and page.url != '/job.html' %}
+              selected
+              {% endif %} menu-blog" href="{{ base_path }}/index.html">Toy Project</a></li>
+            <li><a class="menu-github" href="https://github.com/SADANG-HOBBITS">GitHub</a></li>
+          </ul>
+        </div>
+      </div> 
     </div>
+    <div class="content">
+      {{ content }}
+    </div>
+  </div>
+<!-- Responsive layout polyfill for IE8 and lower -->
+<!--[if lte IE 8]>
+<script>
+var config = {
+    mobileResponsiveBreakpoint: 650
+};
+$(window).on('resize', function(){
+    if($(window).width() <= config.mobileResponsiveBreakpoint){
+        if(!$('body').hasClass('res-mobile')) $('body').addClass('res-mobile');
+    }
+    else {
+        $('body').removeClass('res-mobile');
+    }
+}).trigger('resize');
+</script>
+<![endif]-->
+<script>
+var WebFontConfig = {
+  google: {
+    families: ['Source Sans Pro:400,700,400italic,700italic']
+  },
+  custom: {
+    families: ['Nanum Barun Gothic:400,700'],
+    urls: ['/css/NanumBarunGothic.css']
+  }
+};
 
-    {% include footer.html %}
-
-  </body>
-
+WebFont.load(WebFontConfig);
+</script>
+</body>
 </html>
+
