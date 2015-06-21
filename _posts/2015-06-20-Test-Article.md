@@ -1,9 +1,9 @@
 ---
 layout: entry
-title: "Test Article: 테스트 게시글"
-author: Yoonsung
-author-email: estrella@nhnnext.org
-description: Hovits Test Article
+title: "첫번째 테스트 게시글"
+author: hobbits
+author-email: sadang.hobbits@gmail.com
+description: Hobbits Test Article
 publish: true
 ---
 
