@@ -9,7 +9,7 @@ publish: true
 ---
 
 호빗원정대 그룹에서 처음으로 작성한 코드입니다.  
-처음 Rust를 공부할 때, 기초적인 문법들을 활용해서 실제로 어떤 로직을 수행하는([guessing game](https://doc.rust-lang.org/stable/book/guessing-game.html)과 같은) 예제 코드가 있으면 도움이 될 것 같아서 시작했습니다.
+처음 Rust를 공부할 때, 기초적인 문법들을 활용하면서 간단한 로직을 수행하는([guessing game](https://doc.rust-lang.org/stable/book/guessing-game.html)과 같은) 예제 코드가 있으면 도움이 될 것 같아서 시작했습니다.
 
 야구 게임은 다음과 같은 룰을 가지고 작성했습니다.
 
