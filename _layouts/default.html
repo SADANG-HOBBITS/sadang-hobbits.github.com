@@ -32,8 +32,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
 <script src="//use.typekit.net/zim6rtd.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
-<link rel="stylesheet" href="{{ base_path }}/css/styles.css">
-<link rel="stylesheet" href="{{ base_path }}/css/syntax.css">
+<link rel="stylesheet" href="{{ base_path }}/asset/css/styles.css">
+<link rel="stylesheet" href="{{ base_path }}/asset/css/syntax.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <link href="{{ base_path }}/atom.xml" type="application/atom+xml" rel="alternate" title="Rust Korea Tech Study" />
 <link rel="shortcut icon" href="{{ base_path }}/images/rust-logo.png" />
@@ -55,9 +55,13 @@
               selected
               {% endif %} menu-about" href="{{ base_path }}/about.html">about</a></li>
             <li><a class="
-              {% if page.url != '/about.html' %}
+              {% if page.url != '/about.html' and page.url != '/tags.html' %}
               selected
-              {% endif %} menu-blog" href="{{ base_path }}">Toy Project</a></li>
+              {% endif %} menu-blog" href="{{ base_path }}/index.html">Toy Project</a></li>
+            <li><a class="
+              {% if page.url == '/tags.html' %}
+              selected
+              {% endif %} menu-tags" href="{{ base_path }}/tags.html">Tags</a></li>
             <li><a class="menu-github" href="https://github.com/SADANG-HOBBITS">GitHub</a></li>
           </ul>
         </div>
@@ -90,7 +94,7 @@ var WebFontConfig = {
   },
   custom: {
     families: ['Nanum Barun Gothic:400,700'],
-    urls: ['/css/NanumBarunGothic.css']
+    urls: ['/asset/css/NanumBarunGothic.css']
   }
 };
 
