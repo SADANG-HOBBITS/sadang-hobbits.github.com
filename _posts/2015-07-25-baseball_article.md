@@ -1,11 +1,9 @@
 ---
 layout: entry
-title: "첫번째 테스트 오답노트"
+title: "야구 게임으로 Rust Language 시작하기(Kor)"
 author: hobbits
 author-email: sadang.hobbits@gmail.com
-type: "Tags"
-tags: [a, b, c]
-description: Hobbits Test Article
+description: 
 publish: true
 ---
 

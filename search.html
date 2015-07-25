@@ -2,9 +2,48 @@
 layout: default
 page_title: Search
 ---
-<h1><!-- `key` listing for `value` --></h1>
-
-<ul class="results">
-  <!-- results lists -->
-</ul>
-<script defer src="/assets/js/search.js"></script>
+<div class="tags">	
+</div>
+<div class="posts">
+	<ul class="posts list-type-none">
+	</ul>
+</div>
+<script id="template_tag_simple" type="text/template">
+<span class="tag">
+	<a href="/search.html?tag=$tag_name$">$tag_name$</a>
+</span>	
+</script>
+<script id="template_tag" type="text/template">
+<span class="tag">
+	<a href="/search.html?tag=$tag_name$">$tag_name$
+		<span class="count">$tag_count$</span>
+	</a>
+</span>	
+</script>
+<script id="template" type="text/template">
+<li class="post-item">
+	<div class="post-author-info">
+      	<h2 class="post-title">
+      		<a href="$url$">
+      			<span class="post-title-words">
+      				$title$
+  				</span>
+			</a>
+		</h2>
+		<p class="post-description">
+			$description$
+		</p>
+		<span class="post-date">
+			$year$년 $month$월 $day$일
+		</span>
+		<span class="sep">|</span> 
+		<span class="author-name">
+			$author$
+		</span>
+		<span class="sep">|</span> 
+		$tag_location$
+	</div>
+</li>
+<div style="clear: both;"></div>
+</script>
+<script src="/asset/js/search.js"></script>

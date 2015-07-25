@@ -1,186 +1,182 @@
 (function(window, document, undefined) {
-  // Capitalises a string
-  // Accepts:
-  //   str: string
-  // Returns:
-  //   string
-  var majusculeFirst = function(str) {
-    return str.charAt(0).toUpperCase() + str.substring(1);
-  };
 
   // Retrieves the value of a GET parameter with a given key
   // Accepts:
   //   param: string
   // Returns:
   //   string or null
-  var getParam = function(param) {
+  var getTag = function() {
     var queryString = window.location.search.substring(1),
         queries = queryString.split('&');
-    for (var i in queries) {
-      var pair = queries[i].split('=');
-      if (pair[0] === param) {
-        // Decode the parameter value, replacing %20 with a space etc.
-        return decodeURI(pair[1]);
-      }
-    }
-    return null;
+    
+    if (queryString == "")
+      return null;
+    else
+      return queryString.replace(/tag=/, "");
   };
 
-  // Filters posts with the condition `post['property'] == value`
-  // Accepts:
-  //   posts - array of post objects and a string
-  //   property - string of post object property to compare
-  //   value - filter value of property
-  // Returns:
-  //   array of post objects
-  var filterPostsByPropertyValue = function(posts, property, value) {
-    var filteredPosts = [];
-    // The last element is a null terminator
-    posts.pop();
-    for (var i in posts) {
-      var post = posts[i],
-          prop = post[property];
-
-      // Last element of tags is null
-      post.tags.pop();
-
-      // The property could be a string, such as a post's category,
-      // or an array, such as a post's tags
-      if (prop.constructor === String) {
-        if (prop.toLowerCase() === value.toLowerCase()) {
-          filteredPosts.push(post);
-        }
-      } else if (prop.constructor === Array) {
-        for (var j in prop) {
-          if (prop[j].toLowerCase() === value.toLowerCase()) {
-            filteredPosts.push(post);
-          }
-        }
-      }
-    }
-
-    return filteredPosts;
-  };
-
-  // Formats search results and appends them to the DOM
-  // Accepts:
-  //   property: string of object type we're displaying
-  //   value: string of name of object we're displaying
-  //   posts: array of post objects
-  // Returns:
-  //   undefined
-  var layoutResultsPage = function(property, value, posts) {
-    var $container = $('main');
-    if ($container.length === 0) return;
-
-    // Update the header
-    $container.find('h1').text(majusculeFirst(property)
-      + ' Listing for ‘'
-      + majusculeFirst(value)
-      + '’'
-    );
-
-    // Loop through each post to format it
-    $results = $container.find('ul.results');
-    for (var i in posts) {
-      // Create an unordered list of the post's tags
-      var tagsList = '<ul class="tags">',
-          post     = posts[i],
-          tags     = post.tags;
-
-      for (var j in tags) {
-        tagsList += ''
-          + '<li>'
-            + '<a href="/search.html?tags=' + tags[j] + '">' + tags[j] + '</a>'
-          + '</li>';
-      }
-      tagsList += '</ul>';
-
-      $results.append(
-        '<li>'
-          // Page anchor
-          + '<header>'
-            + '<h1>'
-              + '<a href="' + post.href + '">' + post.title + '</a>'
-            + '</h1>'
-            // Post date
-            + '<h2>'
-              + post.date.formatted
-              + ' in <a href="/search.html?category=' + post.category + '">'
-              +  majusculeFirst(post.category) + '</a>'
-            + '</h2>'
-            // Tags
-            + tagsList
-          + '</header>'
-        + '</li>'
-      );
-    }
-  };
-
-  // Formats the search results page for no results
-  // Accepts:
-  //   property: string of object type we're displaying
-  //   value: string of name of object we're displaying
-  // Returns:
-  //   undefined
-  var noResultsPage = function(property, value) {
-     $('main').find('h1').text('No Results Found.').after(
-      '<p>We couldn\'t find anything associated with ‘' + value + '’ here.</p>'
-    );
-  };
-
-  // Replaces ERB-style tags with Liquid ones as we can't escape them in posts
-  // Accepts:
-  //   elements: jQuery elements in which to replace tags
-  // Returns:
-  //   undefined
-  var replaceERBTags = function(elements) {
-    elements.each(function() {
-      // Only for text blocks at the moment as we'll strip highlighting otherwise
-      var $this = $(this),
-          txt   = $this.html();
-
-      // Replace <%=  %>with {{ }}
-      txt = txt.replace(new RegExp('&lt;%=(.+?)%&gt;', 'g'), '{{$1}}');
-      // Replace <% %> with {% %}
-      txt = txt.replace(new RegExp('&lt;%(.+?)%&gt;', 'g'), '{%$1%}');
-
-      $this.html(txt);
-    });
-  };
-
-  // Define the app object and expose it in the global scope
-  window.alxPrc = {
-    getParam: getParam,
-    filterPostsByPropertyValue: filterPostsByPropertyValue,
-    noResultsPage: noResultsPage,
-    layoutResultsPage: layoutResultsPage,
-    replaceERBTags: replaceERBTags
-  };
+  window.hobbit = {
+    getTag : getTag
+  }
 })(window, window.document);
 
-$(function() {
-  var parameters = ['category', 'tags'];
-  var map = {}
-  for (var idx in parameters) {
-    map[parameters[idx]] = alxPrc.getParam(parameters[idx]);
+var makeTagCloud = function(dictionary) {
+  var tag_dictionary = {};
+  var tag_list = [];
+
+  var i = 0;
+  var i_length = dictionary.length;
+
+  if (i_length == 0)
+    return;
+
+  for (i ; i < i_length ; ++i) {
+
+    if (dictionary[i] == null)
+      continue;
+
+    var tags = dictionary[i]["tags"];
+    var j = 0;
+    var j_length = tags.length;
+    var current_tag = null;
+
+    for (j ; j < j_length ; ++j) {
+      current_tag = tags[j];
+
+      if (current_tag == null)
+        continue;
+
+      if (tag_dictionary[current_tag] == null) {
+        tag_dictionary[current_tag] = 1;
+        tag_list.push(current_tag);
+      } else {
+        tag_dictionary[current_tag] += 1;
+      }
+    }
   }
 
-  $.each(map, function(type, value) {
-    if (value !== null) {
-      $.getJSON('/search.json', function(data) {
-        posts = alxPrc.filterPostsByPropertyValue(data, type, value);
-        if (posts.length === 0) {
-          alxPrc.noResultsPage(type, value);
-        } else {
-          alxPrc.layoutResultsPage(type, value, posts);
-        }
-      });
-    }
-  });
+  var k = 0;
+  var k_length = tag_list.length;
+  var tag_string = "";
+  for (k ; k < k_length ; ++k) {
+    var tag_template = $("#template_tag").text();
+    var current_tag_name = tag_list[k];
+    tag_template = tag_template.replace(/\$tag_name\$/g, current_tag_name);
+    tag_template = tag_template.replace(/\$tag_count\$/g, tag_dictionary[current_tag_name]);
 
-  // Replace ERB-style Liquid tags in highlighted code blocks...
-  alxPrc.replaceERBTags($('div.highlight').find('code.text'));
-  // ... and in inline code
-  alxPrc.replaceERBTags($('p code'));
+    tag_string += tag_template;
+  }
+
+  $(".tags").html(tag_string);
+}
+
+var getTagTemplateString = function(tags) {
+  var tagString = "";
+  var i = 0;
+  var length = tags.length;
+
+  for (i ; i < length ; ++i) {
+    if (tags[i] == null)
+      continue;
+    var tag_template = $("#template_tag_simple").text();
+    tagString += tag_template.replace(/\$tag_name\$/g, tags[i]);
+  }
+
+  return tagString;
+}
+
+var getTagTemplateStringByTagName = function(tagName, tags) {
+  var tagString = "";
+  var i = 0;
+  var length = tags.length;
+
+  var isTagExist = false;
+  for (i ; i < length ; ++i) {
+    if (tags[i] == null)
+      continue;
+
+    if (tags[i] == tagName)
+      isTagExist = true;
+
+    var tag_template = $("#template_tag_simple").text();
+    tagString += tag_template.replace(/\$tag_name\$/g, tags[i]);
+  }
+
+  if (isTagExist)
+    return tagString;
+  else
+    return "";
+}
+
+var getTemplateString = function(element) {
+
+  if (element == null)
+    return "";
+
+  var template = $('#template').text();
+  
+  template = template.replace(/\$author\$/g, element["author"]);
+  template = template.replace(/\$url\$/g, element["url"]);
+  template = template.replace(/\$title\$/g, element["title"]);
+  template = template.replace(/\$description\$/g, element["description"]);
+  template = template.replace(/\$year\$/g, element["date"]["year"]);
+  template = template.replace(/\$month\$/g, element["date"]["month"]);
+  template = template.replace(/\$day\$/g, element["date"]["day"]);
+
+  var tagString = getTagTemplateString(element["tags"]);
+  template = template.replace(/\$tag_location\$/g, tagString);
+
+  return template;
+};
+
+var getTemplateStringByTagName = function(tagName, element) {
+
+  if (element == null)
+    return "";
+
+var tagString = getTagTemplateStringByTagName(tagName, element["tags"]);
+  if (tagString == "")
+    return "";
+
+  var template = $('#template').text();
+  
+  template = template.replace(/\$author\$/g, element["author"]);
+  template = template.replace(/\$url\$/g, element["url"]);
+  template = template.replace(/\$title\$/g, element["title"]);
+  template = template.replace(/\$description\$/g, element["description"]);
+  template = template.replace(/\$year\$/g, element["date"]["year"]);
+  template = template.replace(/\$month\$/g, element["date"]["month"]);
+  template = template.replace(/\$day\$/g, element["date"]["day"]);
+  template = template.replace(/\$tag_location\$/g, tagString);
+
+  return template;
+};
+
+$(function() {
+
+  $.getJSON('/search.json', function(data) {
+
+    makeTagCloud(data);
+
+    var tag = hobbit.getTag();
+    var addedHTML = "";
+    
+    if (tag == null) {
+      var i = 0 ;
+      var length = data.length;
+      for (i ; i < length ; ++i) {
+        addedHTML += getTemplateString(data[i]);
+      }
+          
+    } else {
+      var i = 0 ;
+      var length = data.length;
+      for (i ; i < length ; ++i) {
+        addedHTML += getTemplateStringByTagName(tag, data[i]);
+      }
+
+    }
+
+    $(".posts ul").html(addedHTML);
+  });
 });

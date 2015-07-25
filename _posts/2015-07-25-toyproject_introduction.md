@@ -1,11 +1,9 @@
 ---
 layout: entry
-title: "첫번째 테스트 오답노트"
+title: "Toy Project 란?"
 author: hobbits
 author-email: sadang.hobbits@gmail.com
-type: "Tags"
-tags: [a, b, c]
-description: Hobbits Test Article
+description: 
 publish: true
 ---
 
