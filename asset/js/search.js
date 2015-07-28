@@ -1,10 +1,5 @@
 (function(window, document, undefined) {
 
-  // Retrieves the value of a GET parameter with a given key
-  // Accepts:
-  //   param: string
-  // Returns:
-  //   string or null
   var getTag = function() {
     var queryString = window.location.search.substring(1),
         queries = queryString.split('&');
