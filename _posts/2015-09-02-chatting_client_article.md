@@ -11,7 +11,7 @@ publish: true
 호빗원정대에서 선택한 두 번째 Toy Project는 Chatting Server / Client 입니다.
 
 채팅 프로그램을 선정해 작업한 이유는 Rust의 특징을 잘 이해할 수 있는 프로젝트이기 때문입니다.
-Rust는 Gar프로젝트가bage Collector(이하 GC) 없는 메모리 관리가 대표적인 특징이지만, Multi Thread에도 유리한 언어입니다. 따라서 Rust 공식 홈페이지 Book에서도 Dining Philosophers([Link](https://doc.rust-lang.org/stable/book/dining-philosophers.html))라는 예제를 제공하기도 합니다.
+Rust는 Garbage Collector(이하 GC) 없는 메모리 관리가 대표적인 특징이지만, Multi Thread에도 유리한 언어입니다. 따라서 Rust 공식 홈페이지 Book에서도 Dining Philosophers([Link](https://doc.rust-lang.org/stable/book/dining-philosophers.html))라는 예제를 제공하기도 합니다.
 지난 야구 게임은 문법에 익숙해지기 위한 것이었다면, 이번 채팅 프로그램은 Rust 언어에 대한 특징을 느낄수 있도록 구성했습니다.
 
 채팅 프로그램 수행 동작
