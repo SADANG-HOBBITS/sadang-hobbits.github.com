@@ -55,11 +55,11 @@
               selected
               {% endif %} menu-about" href="{{ base_path }}/about.html">about</a></li>
             <li><a class="
-              {% if page.url != '/about.html' and page.url != '/tags.html' %}
+              {% if page.url != '/about.html' and page.url != '/search.html' %}
               selected
               {% endif %} menu-blog" href="{{ base_path }}/index.html">Toy Project</a></li>
             <li><a class="
-              {% if page.url == '/tags.html' %}
+              {% if page.url != '/about.html' and page.url != '/search.html' %}
               selected
               {% endif %} menu-tags" href="{{ base_path }}/search.html">Tags</a></li>
             <li><a class="menu-github" href="https://github.com/SADANG-HOBBITS">GitHub</a></li>
