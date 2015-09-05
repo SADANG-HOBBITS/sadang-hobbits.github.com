@@ -340,9 +340,10 @@ a.footnote:hover,
   /*float: right;
   margin-left: 40px;*/
   float: left;
-  margin-top: 25px;
+  margin-top: 1px;
   margin-left: 10px;
   margin-right: 30px;
+  margin-bottom: 8px;
 }
 
 .posts li {
@@ -437,7 +438,8 @@ a.footnote:hover,
   width: 17%;
   vertical-align: middle;
   border-radius: 50%;
-  border: 4px solid rgb(176, 182, 194);
+  /*border: 2px solid rgb(176, 182, 194);*/
+  padding: 8px;
 }
 .post-author-info .author-name a,
 .post-author-info .author-name {

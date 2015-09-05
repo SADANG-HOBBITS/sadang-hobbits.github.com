@@ -3,7 +3,7 @@ layout: entry
 type: "ToyProject"
 title: "야구 게임으로 Rust Language 시작하기(Kor)"
 author: hobbits
-author-email: sadang.hobbits@gmail.com
+image: baseball.png
 description: 
 publish: true
 ---

@@ -3,7 +3,7 @@ layout: entry
 type: "ToyProject"
 title: "Rust 채팅 서버(Kor only)"
 author: hobbits
-author-email: sadang.hobbits@gmail.com
+image: chat.png
 description: 
 publish: true
 ---

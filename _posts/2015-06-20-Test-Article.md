@@ -3,7 +3,7 @@ layout: entry
 type: "ToyProject"
 title: "첫번째 테스트 게시글"
 author: hobbits
-author-email: sadang.hobbits@gmail.com
+image: prepare.png
 description: Hobbits Test Article
 publish: true
 ---

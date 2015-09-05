@@ -3,7 +3,7 @@ layout: entry
 type: "ToyProject"
 title: "Toy Project 란?"
 author: hobbits
-author-email: sadang.hobbits@gmail.com
+image: toy.png
 description: Rust를 Toy Project로 '극뽁'합시다:)
 publish: true
 ---
