@@ -57,3 +57,5 @@ r : Client Read Thread
 
 코드 링크   
 [Chatting Server(Github)](https://github.com/wooq17/rust_study/blob/master/chatting_server/src/main.rs)  
+
+<script src="https://gist-it.appspot.com/github/wooq17/rust_study/blob/master/chatting_server/src/main.rs"></script>
