@@ -33,4 +33,6 @@ Rust는 Garbage Collector(이하 GC) 없는 메모리 관리가 대표적인 특
 read thread와 write thread(main thread) 2개의 thread가 독립적으로 작업 수행    
 
 코드 링크   
-[Chatting Client(Github)](https://github.com/wooq17/rust_study/blob/master/chatting_client/src/main.rs)  
+[Chatting Client (Github)](https://github.com/SADANG-HOBBITS/Simple_Chatting/blob/master/chatting_client/src/main.rs)  
+
+<script src="https://gist-it.appspot.com/github/SADANG-HOBBITS/Simple_Chatting/blob/master/chatting_client/src/main.rs"></script>  

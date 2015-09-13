@@ -5,7 +5,7 @@ title: "첫번째 테스트 게시글"
 author: hobbits
 image: prepare.png
 description: Hobbits Test Article
-publish: true
+publish: false
 ---
 
 테스트

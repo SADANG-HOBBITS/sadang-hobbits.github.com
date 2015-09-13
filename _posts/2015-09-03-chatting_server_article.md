@@ -34,10 +34,10 @@ Rust 채팅 서버에서 발생하는 모든 이벤트(클라이언트 접속, �
 채팅 서버 Work Flow  
 1. m) main 함수로 진입  
 2. m) 지정된 ip와 port를 TcpListener에 binding  
-3. m) 신규 Chat Group을 만들고(initialize), Chat Group에 있는 Channel 송신부(transmitter)를 하나 Clone해 가져옴      
+3. m) 신규 Event Handler를 만들고(initialize), Event Handler에 있는 Channel 송신부(Sender)를 하나 Clone해 가져옴      
 4. m) Chat Event를 처리 하는 thread 생성(8번으로 이동)  
 5. m) TcpLister에 접속 요청이 들어오면 TcpStream을 만듦  
-6. m) 신규 TcpStream을 포함하는 새로운 Client 객체를 만들어 3번에서 준비한 Channel transmitter에 newClient Signal 발송  
+6. m) 신규 TcpStream을 포함하는 새로운 Client 객체를 만들어 3번에서 준비한 Channel Sender에 newClient Signal 발송  
 7. m) 다음 접속 요청까지 대기 후 접속시 5번부터 반복   
 8. c) loop 돌며 chat event를 처리하는 cycle 함수 실행  
 9. c) cycle 함수는 Channel 수신부(receive)에서 송신부를 통한 내부 Signal을 기다림  
@@ -56,6 +56,18 @@ c : Chat Group Thread
 r : Client Read Thread  
 
 코드 링크   
-[Chatting Server(Github)](https://github.com/wooq17/rust_study/blob/master/chatting_server/src/main.rs)  
+[Header (Github)](https://github.com/SADANG-HOBBITS/Simple_Chatting/blob/master/components/header/src/lib.rs)  
 
-<script src="https://gist-it.appspot.com/github/wooq17/rust_study/blob/master/chatting_server/src/main.rs"></script>
+<script src="https://gist-it.appspot.com/github/SADANG-HOBBITS/Simple_Chatting/blob/master/components/header/src/lib.rs"></script>  
+
+[Message Reader (Github)](https://github.com/SADANG-HOBBITS/Simple_Chatting/blob/master/components/client/src/lib.rs)  
+
+<script src="https://gist-it.appspot.com/github/SADANG-HOBBITS/Simple_Chatting/blob/master/components/client/src/lib.rs"></script>  
+
+[Event Handler (Github)](https://github.com/SADANG-HOBBITS/Simple_Chatting/blob/master/components/event_handler/src/lib.rs)  
+
+<script src="https://gist-it.appspot.com/github/SADANG-HOBBITS/Simple_Chatting/blob/master/components/event_handler/src/lib.rs"></script>  
+
+[Chatting Server (Github)](https://github.com/SADANG-HOBBITS/Simple_Chatting/blob/master/chatting_server/src/main.rs)  
+
+<script src="https://gist-it.appspot.com/github/SADANG-HOBBITS/Simple_Chatting/blob/master/chatting_server/src/main.rs"></script>  
