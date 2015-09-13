@@ -20,7 +20,7 @@ Rust 채팅 서버는 클라이언트에서 소개한 것처럼, 접속 상한�
 
 서버의 thread 개수는 연결되는 클라이언트 개수로 결정됩니다. 접속하는 클라이언트 개수를 n으로 치면 n + 2 개 입니다. 각각의 thread는 다음과 같습니다.  
 1. connection을 확인하는 main thread(1개)  
-2. 이벤트 처리(chat group 관련 동작 수행) thread(1개)  
+2. Event Handling(chat event  처리) thread(1개)  
 3. 각 클라이언트가 보내는 메시지를 받는 thread(n개)  
 
 
@@ -35,17 +35,17 @@ Rust 채팅 서버에서 발생하는 모든 이벤트(클라이언트 접속, �
 1. m) main 함수로 진입  
 2. m) 지정된 ip와 port를 TcpListener에 binding  
 3. m) 신규 Chat Group을 만들고(initialize), Chat Group에 있는 Channel 송신부(transmitter)를 하나 Clone해 가져옴      
-4. m) Chat Group을 managing 하는 thread를 생성(8번으로 이동)  
+4. m) Chat Event를 처리 하는 thread 생성(8번으로 이동)  
 5. m) TcpLister에 접속 요청이 들어오면 TcpStream을 만듦  
 6. m) 신규 TcpStream을 포함하는 새로운 Client 객체를 만들어 3번에서 준비한 Channel transmitter에 newClient Signal 발송  
 7. m) 다음 접속 요청까지 대기 후 접속시 5번부터 반복   
-8. c) Chat Group에 Implement된 cycle 함수(loop) 실행  
+8. c) loop 돌며 chat event를 처리하는 cycle 함수 실행  
 9. c) cycle 함수는 Channel 수신부(receive)에서 송신부를 통한 내부 Signal을 기다림  
 10. c) 수신 받은 내부 Signal에 따라 각각의 프로세스 진행  
 11. c) NewClient Signal 경우 새로운 id를 발급해 클라이언트에 발송 및 Chat Group에 해당 클라이언틀 등록한 다음 read client stream thread 생성(14번으로 이동)   
 12. c) NewMessage Signal 경우 현재 Chat Group에 등록되어 있는 모든 클라이언트를 순회하며 메시지 발송  
 13. c) Close Signal 경우 Chat Group에 등록되어 있는 클라이언트 중 자신의 클라이언트를 찾아 제거     
-14. c) chat group Thread 반복   
+14. c) Event Handling Thread 반복   
 14. r) clinet cycle 함수(loop) 실행    
 15. r) read message 함수부터는 클라이언트의 read message와 동일  
 16. r) client read thread 반복    
